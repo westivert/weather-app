@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block titel %}Väderkollen{% endblock %}</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f3ed;
+            color: #182e2c;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        header,
+        main,
+        footer {
+            max-width: 1100px;
+            margin: auto;
+            padding: 24px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #d5dcd3;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #586c65;
+        }
+
+        .tag,
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .tag {
+            border: 1px solid #bccbc0;
+            border-radius: 30px;
+            padding: 7px 12px;
+        }
+
+        .intro {
+            padding: 50px 0 38px;
+            max-width: 760px;
+        }
+
+        .eyebrow {
+            color: #426653;
+            margin: 24px 0 12px;
+        }
+
+        h1 {
+            font-size: clamp(40px, 7vw, 76px);
+            line-height: 1.08;
+            letter-spacing: -3px;
+            margin: 12px 0 24px;
+        }
+
+        h2 {
+            font-size: 22px;
+            letter-spacing: -0.5px;
+        }
+
+        .lead {
+            font-size: 18px;
+            color: #52655d;
+        }
+
+        .panel {
+            background: #fff;
+            border: 1px solid #dbe1d8;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .valj {
+            margin-top: 32px;
+            max-width: 650px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .formrad {
+            display: flex;
+            gap: 12px;
+        }
+
+        select,
+        button,
+        .knapp {
+            font: inherit;
+            border-radius: 8px;
+            padding: 13px 18px;
+        }
+
+        select {
+            min-width: 0;
+            flex: 1;
+            border: 1px solid #9baea1;
+            background: #fff;
+            color: #182e2c;
+        }
+
+        button,
+        .knapp {
+            border: 0;
+            background: #204e3a;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button:hover,
+        .knapp:hover {
+            background: #123925;
+        }
+
+        a {
+            color: #245b42;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #bf6b25;
+            outline-offset: 4px;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: #65746c;
+            margin-bottom: 0;
+        }
+
+        .information {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            border-top: 1px solid #d5dcd3;
+            padding: 28px 0;
+        }
+
+        .information strong {
+            font-size: 14px;
+        }
+
+        .information p {
+            font-size: 14px;
+            color: #65746c;
+        }
+
+        .matvarden {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 26px 0;
+        }
+
+        .matvarden p {
+            margin-top: 0;
+            color: #5b6c62;
+            font-size: 14px;
+        }
+
+        .matvarden strong {
+            font-size: 36px;
+            letter-spacing: -1px;
+        }
+
+        .matvarden small {
+            font-size: 18px;
+        }
+
+        .prognos {
+            margin: 20px 0;
+        }
+
+        .tabell {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        caption {
+            text-align: left;
+            color: #65746c;
+            font-size: 14px;
+            padding-bottom: 12px;
+        }
+
+        th,
+        td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #e1e6dd;
+            white-space: nowrap;
+        }
+
+        thead {
+            background: #f3f6ef;
+        }
+
+        tbody th {
+            font-weight: 400;
+        }
+
+        .tillbaka {
+            display: inline-block;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: 26px;
+            border-top: 1px solid #d5dcd3;
+            font-size: 12px;
+            color: #65746c;
+        }
+
+        /* Anpassning för mobil. */
+        @media (max-width: 640px) {
+            header,
+            main,
+            footer {
+                padding: 20px;
+            }
+
+            .tag {
+                display: none;
+            }
+
+            .intro {
+                padding-top: 25px;
+            }
+
+            .formrad {
+                flex-direction: column;
+            }
+
+            .matvarden,
+            .information {
+                grid-template-columns: 1fr;
+            }
+
+            .matvarden {
+                gap: 10px;
+            }
+
+            .matvarden strong {
+                font-size: 30px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a class="brand" href="{{ url_for('home') }}">
+            Väderkollen<span> / Sverige</span>
+        </a>
+
+        <span class="tag">TRE DAGAR FRAMÅT</span>
+    </header>
+
+    <main>
+        {% block innehall %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        Väderdata från
+        <a href="https://open-meteo.com/">Open-Meteo</a>
+        ·
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+            CC BY 4.0
+        </a>
+        · Prognoser kan ändras.
+    </footer>
+</body>
+</html>

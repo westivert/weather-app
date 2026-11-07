@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block titel %}{{ stad }} · Väderkollen{% endblock %}
+
+{% block innehall %}
+<a class="tillbaka" href="{{ url_for('home') }}">← Byt stad</a>
+
+<p class="eyebrow">DIN VÄDERPROGNOS</p>
+<h1>{{ stad }}</h1>
+
+<section class="matvarden" aria-label="Väderöversikt">
+    <div class="panel">
+        <p>Temperatur just nu</p>
+        <strong>{{ vader.temperatur | temperatur }}</strong>
+    </div>
+
+    <div class="panel">
+        <p>Vind just nu</p>
+        <strong>{{ vader.vind }} <small>km/h</small></strong>
+    </div>
+
+    <div class="panel">
+        <p>Medel av tre dagars högsta</p>
+        <strong>{{ medel | temperatur }}</strong>
+    </div>
+</section>
+
+{% if vader.dagar %}
+    <section class="panel prognos">
+        <h2>De kommande tre dagarna</h2>
+
+        <div class="tabell">
+            <table>
+                <caption>Daglig prognos för {{ stad }}</caption>
+
+                <thead>
+                    <tr>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Högsta</th>
+                        <th scope="col">Lägsta</th>
+                        <th scope="col">Nederbörd</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for dag in vader.dagar %}
+                        <tr>
+                            <th scope="row">{{ dag.datum }}</th>
+                            <td>{{ dag.hogsta | temperatur }}</td>
+                            <td>{{ dag.lagsta | temperatur }}</td>
+                            <td>{{ dag.nederbord }} mm</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel prognos">
+        <h2>Temperaturens utveckling</h2>
+
+        <p class="hint">
+            Högsta och lägsta temperatur för varje dag. Exakta värden finns i tabellen.
+        </p>
+
+        {{ diagram | safe }}
+    </section>
+{% endif %}
+{% endblock %}

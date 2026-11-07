@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titel %}Fel {{ kod }} · Väderkollen{% endblock %}
+
+{% block innehall %}
+<section class="intro">
+    <p class="eyebrow">FEL {{ kod }}</p>
+
+    <h1>Det gick inte<br>den här gången.</h1>
+
+    <p class="lead" role="alert">{{ meddelande }}</p>
+
+    <a class="knapp" href="{{ url_for('home') }}">
+        Tillbaka till startsidan →
+    </a>
+</section>
+{% endblock %}

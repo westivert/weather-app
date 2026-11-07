@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+
+{% block innehall %}
+<section class="intro">
+    <p class="eyebrow">FRÅN SÖDER TILL NORR</p>
+
+    <h1>Hur blir vädret<br>där du är?</h1>
+
+    <p class="lead">
+        Aktuell temperatur, vind och en tredagarsprognos.<br>
+        Välj en av fem svenska städer för att komma igång.
+    </p>
+
+    <form action="{{ url_for('sokningen') }}" method="get" class="panel valj">
+        <label for="stad">Välj stad</label>
+
+        <div class="formrad">
+            <select id="stad" name="stad" required>
+                {% for stad in stader %}
+                    <option value="{{ stad }}">{{ stad }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">
+                Visa prognos <span aria-hidden="true">→</span>
+            </button>
+        </div>
+
+        <p class="hint">
+            Prognosen hämtas när du trycker på knappen.
+        </p>
+    </form>
+</section>
+
+<section class="information">
+    <div>
+        <strong>01 / Just nu</strong>
+        <p>Temperatur och vind på vald plats.</p>
+    </div>
+
+    <div>
+        <strong>02 / Kommande dagar</strong>
+        <p>Högsta, lägsta och nederbörd.</p>
+    </div>
+
+    <div>
+        <strong>03 / Överblick</strong>
+        <p>Temperaturkurva och medelvärde.</p>
+    </div>
+</section>
+{% endblock %}
