@@ -25,3 +25,6 @@ python app.py
 pytest
 ruff check .
 ```
+
+
+#€cheboy€#
